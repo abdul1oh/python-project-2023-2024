@@ -1,6 +1,7 @@
-# X/O O'yin
 
+# X/O games with robot
 
+import random
 class Oyin():
     # Klasslarni ko'pincha katta harf bilan boshlaydi
 
@@ -25,14 +26,27 @@ class Oyin():
         '''
         O'yinchi qayerga qo'yishni aytsa, o'yinni yangilab, saqlab qo'yish kerak.
         '''
-        odam = input(f"kimning navbati(X vs O):")
-        oyinchi = int(input(f"{odam} ning joylashuvini kiriting(1:9):"))
-        if self.taxta[oyinchi-1] == ' ':
-            self.taxta[oyinchi-1] = f'{odam}'
-            return True
+
+        odam = input(f"Kimning navbati(X vs O):")
+        if odam == 'X':
+            oyinchi = int(input(f"{odam} ning joylashuvini kiriting(1:9):"))
+            if self.taxta[oyinchi - 1] == ' ':
+                self.taxta[oyinchi - 1] = f'{odam}'
+                return True
+        elif odam == 'O':
+            return self.computer()
         else:
             print("raqam kiritganinggizga ishonch hosil qiling!")
-            return False
+    def computer(self):
+        list = []
+        for i in range(len(self.taxta)):
+            if self.taxta[i] == ' ':
+                list.append(i)
+        yurish = random.choice(list)
+        self.taxta[yurish] = 'O'
+        return True
+
+
     def yutish(self):
         yutish_k = [(0, 1, 2), (3, 4, 5), (6, 7, 8), (0, 3, 6), (1, 4, 7), (2, 5, 8), (0, 4, 8), (2, 4, 6)]
         for i in yutish_k:
